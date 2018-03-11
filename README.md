@@ -1,24 +1,33 @@
-# README
+# 想定テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## User
+  * name
+  * email
+  * pass_word_digest
+  * remember_digest
+  * admin
+  * thumbnail
 
-Things you may want to cover:
+## Task
+  * title
+  * content
+  * status
+  * user_id
+  * position
+  * end_period
+  * file
 
-* Ruby version
+## Label
+  * name
+  * task_id
 
-* System dependencies
+## GroupUser
+  * group_id
+  * user_id
 
-* Configuration
+## GroupTask
+  * group_id
+  * task_id
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Group
+  * name
