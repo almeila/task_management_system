@@ -1,33 +1,32 @@
 # 想定テーブル
 
 ## User
-  * name
-  * email
-  * pass_word_digest
-  * remember_digest
-  * admin
-  * thumbnail
+  * name(string)
+  * email(string)
+  * password_digest(string)
+  * remember_digest(string)
+  * admin(boolean)
+  * thumbnail(string)
 
 ## Task
-  * title
-  * content
-  * status
-  * user_id
-  * position
-  * end_period
-  * file
+  * title(string)
+  * content(text)
+  * status(string)
+  * user_id(integer)
+  * position(integer)
+  * end_period(datetime)
 
 ## Label
-  * name
-  * task_id
+  * name(string)
+  * task_id(integer)
 
 ## GroupUser
-  * group_id
-  * user_id
+  * group_id(integer)
+  * user_id(integer)
 
 ## GroupTask
-  * group_id
-  * task_id
+  * group_id(integer)
+  * task_id(integer)
 
 ## Group
-  * name
+  * name(string)
