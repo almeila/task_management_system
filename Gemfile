@@ -16,6 +16,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'pg'
 
+gem 'jquery-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -41,6 +42,11 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+
+  gem 'pry-rails' 
+  gem 'pry-doc'  
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 group :development do
@@ -54,4 +60,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'haml-rails'
+gem 'erb2haml'
 
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
