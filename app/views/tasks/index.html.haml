@@ -3,4 +3,10 @@
 = link_to "新しいタスクを作成", new_task_path
 
 - @tasks.each do |task| 
-  %li= task.title
+  %div
+    = task.title
+    = task.status
+    = task.end_period
+    = link_to '編集' , edit_task_path(task)
+    = link_to '削除' , task, method: :delete, data: { confirm: "#{task.title}を削除しますか？" }
+    
