@@ -47,6 +47,19 @@ group :development, :test do
   gem 'pry-doc'  
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+
+  gem "rspec-rails"
+  gem "factory_girl_rails"
+  gem "guard-rspec"
+  gem "spring-commands-rspec"
+end
+
+group :test do
+  gem "faker"
+  gem "database_cleaner"
+  gem "launchy"
+  gem "selenium-webdriver"
+  gem "shoulda-matchers"
 end
 
 group :development do
