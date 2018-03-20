@@ -1,12 +1,13 @@
-= "総件数 #{@tasks.count}"
+= t('view.tasks.task_count', count: @tasks.count)
 
-= link_to "新しいタスクを作成", new_task_path
+%div 
+  = link_to t('view.tasks.new'), new_task_path
 
 - @tasks.each do |task| 
   %div
     = task.title
     = task.status
     = task.end_period
-    = link_to '編集' , edit_task_path(task)
-    = link_to '削除' , task, method: :delete, data: { confirm: "#{task.title}を削除しますか？" }
+    = link_to t('view.tasks.edit') , edit_task_path(task)
+    = link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }
     

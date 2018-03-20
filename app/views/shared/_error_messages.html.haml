@@ -1,8 +1,7 @@
 - if object.errors.any?
   #error_explanation
     %h2
-      = object.errors.count
-      件のエラーがあります。
+      = t('view.shared.error_message_count' , count: object.errors.count) 
     %ul
       - object.errors.full_messages.each do |msg|
         %li= msg
