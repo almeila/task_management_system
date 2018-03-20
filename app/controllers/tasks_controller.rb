@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      flash[:success] = "#{@task.title}を登録しました。"
+      flash[:success] = t('controller.tasks.create_message', title: @task.title)
       redirect_to action: 'index'
     else
       render 'new'
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
-      flash[:success] = "#{@task.title}を更新しました。"
+      flash[:success] = t('controller.tasks.update_message', title: @task.title)
       redirect_to action: 'index'
     else
       render 'edit'
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    flash[:success] = "削除しました。"
+    flash[:success] = t('controller.tasks.destroy_message')
     redirect_to action: 'index'
   end
 

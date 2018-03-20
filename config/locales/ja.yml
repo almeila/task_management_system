@@ -1,0 +1,52 @@
+ja:
+  controller:
+    tasks:
+      create_message: '%{title}を登録しました。'
+      update_message: '%{title}を更新しました。'
+      destroy_message: '削除しました。'
+
+  view:
+    shared:
+      error_message_count: '%{count}件のエラーがあります。'
+
+    tasks:
+      index: '一覧'
+      new: '新規作成'
+      delete: '削除'
+      edit: '編集'
+      index_page: 'タスク一覧'
+      new_page: '登録画面'
+      edit_page: '編集画面'
+
+      task_count: '件数： %{count}'
+      delete_confirm: "%{title}を削除しますか？"
+
+      title: 'タイトル'
+      content: '内容'
+      end_period: '予定終了期間'
+      create: '登録'
+
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+
+    day_names: [日曜日, 月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日]
+    abbr_day_names: [日, 月, 火, 水, 木, 金, 土]
+
+    month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%y/%m/%d %H:%M"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
+    am: "午前"
+    pm: "午後"

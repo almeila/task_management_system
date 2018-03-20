@@ -1,13 +1,13 @@
 = form_for @task do |f|
   = render 'shared/error_messages', object: f.object
   
-  = f.label :title, "タイトル"
+  = f.label :title, t('view.tasks.title')
   = f.text_field :title , class: 'form-control'
 
-  = f.label :content, "内容"
+  = f.label :content, t('view.tasks.content')
   = f.text_field :content , class: 'form-control'
 
-  = f.label :end_period, "予定終了期間"
+  = f.label :end_period, t('view.tasks.end_period')
   = f.date_select :end_period , class: 'form-form-control date-picker' 
 
-  = f.submit '登録'
+  = f.submit t('view.tasks.create')
