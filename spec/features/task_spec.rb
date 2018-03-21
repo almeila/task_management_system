@@ -4,14 +4,14 @@ describe 'タスク機能', type: :feature do
 
   before do
     visit root_path
-    click_on '新しいタスクを作成'
+    click_on '新規作成'
 
     # 必要項目を入力
     @test_title = 'テストタイトル'
     fill_in 'タイトル', with: @test_title
     fill_in '内容', with: 'テストをする。'
     select '2018', from: 'task[end_period(1i)]'
-    select 'December', from: 'task[end_period(2i)]'
+    select '11月', from: 'task[end_period(2i)]'
     select '25', from: 'task[end_period(3i)]'
 
     click_on '登録'
@@ -40,5 +40,17 @@ describe 'タスク機能', type: :feature do
     expect(current_path).to eq root_path
     expect(page).to have_content '削除しました。'
     expect(page).not_to have_content @test_title
+  end
+
+  it '一覧' do
+    FactoryGirl.create_list(:task, 5)
+    visit current_path
+    titles = page.all('.task_title')
+
+    expect( titles[0].text ).to eq "MyString5" 
+    expect( titles[1].text ).to eq "MyString4" 
+    expect( titles[2].text ).to eq "MyString3" 
+    expect( titles[3].text ).to eq "MyString2" 
+    expect( titles[4].text ).to eq "MyString1" 
   end
 end
