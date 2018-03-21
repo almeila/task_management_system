@@ -3,11 +3,19 @@
 %div 
   = link_to t('view.tasks.new'), new_task_path
 
-- @tasks.each do |task| 
-  %div
-    = task.title
-    = task.status
-    = task.end_period
-    = link_to t('view.tasks.edit') , edit_task_path(task)
-    = link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }
-    
+.task_list
+  %table
+    %tr
+      %th タイトル
+      %th ステータス
+      %th 終了予定期間
+      %th 編集
+      %th 削除
+    - @tasks.each do |task|
+      %tr
+        %td.task_title
+          = task.title
+        %td= task.status
+        %td= task.end_period
+        %td= link_to t('view.tasks.edit') , edit_task_path(task)
+        %td= link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }

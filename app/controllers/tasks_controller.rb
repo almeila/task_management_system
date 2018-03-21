@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :load_task, only: [:edit, :destroy, :update]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: 'DESC')
   end
 
   def new
