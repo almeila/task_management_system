@@ -1,0 +1,31 @@
+ja:
+  controller:
+    tasks:
+      create_message: '%{title}を登録しました。'
+      update_message: '%{title}を更新しました。'
+      destroy_message: '削除しました。'
+
+  view:
+    shared:
+      error_message_count: '%{count}件のエラーがあります。'
+
+    tasks:
+      index: '一覧'
+      new: '新規作成'
+      delete: '削除'
+      edit: '編集'
+      index_page: 'タスク一覧'
+      new_page: '登録画面'
+      edit_page: '編集画面'
+
+      task_count: '件数： %{count}'
+      delete_confirm: "%{title}を削除しますか？"
+
+      title: 'タイトル'
+      content: '内容'
+      end_period: '予定終了期間'
+      create: '登録'
+
+  model:
+    tasks:
+      end_period_error_message: 'は未来の日付を入力して下さい。'
