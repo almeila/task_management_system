@@ -1,3 +1,9 @@
+# 環境
+  ```
+   ruby -v → ruby 2.5.0
+   rails -v → Rails 5.1.5
+  ```
+
 # 想定テーブル
 
 ## User
@@ -30,3 +36,13 @@
 
 ## Group
   * name(string)
+
+
+# Herokuのデプロイ
+```heroku create```
+
+```git push heroku master```
+
+```heroku run rake db:migrate```
+
+```heroku open```
