@@ -2,15 +2,17 @@
 
 %div 
   = link_to t('view.tasks.new'), new_task_path
+%div 
+
 
 .task_list
   %table
     %tr
-      %th タイトル
-      %th ステータス
-      %th 終了予定期間
-      %th 編集
-      %th 削除
+      %th= t('view.tasks.title')
+      %th= t('view.tasks.status')
+      %th= link_to t('view.tasks.end_period'), sort: 'end_period'
+      %th= t('view.tasks.edit')
+      %th= t('view.tasks.delete')
     - @tasks.each do |task|
       %tr
         %td.task_title
