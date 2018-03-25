@@ -12,6 +12,7 @@ ja:
     tasks:
       index: '一覧'
       new: '新規作成'
+      status: 'ステータス'
       delete: '削除'
       edit: '編集'
       index_page: 'タスク一覧'

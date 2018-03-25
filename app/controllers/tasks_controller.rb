@@ -3,7 +3,11 @@ class TasksController < ApplicationController
   before_action :load_task, only: [:edit, :destroy, :update]
 
   def index
-    @tasks = Task.order(created_at: 'DESC')
+    if params[:sort].present?
+      @tasks = Task.order(params[:sort])
+    else
+      @tasks = Task.order(created_at: 'DESC')
+    end  
   end
 
   def new

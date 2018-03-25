@@ -42,15 +42,28 @@ describe 'タスク機能', type: :feature do
     expect(page).not_to have_content @test_title
   end
 
-  it '一覧' do
+  it '一覧ページにてタスクが作成日順に表示されている事を確認' do
     FactoryGirl.create_list(:task, 5)
     visit current_path
     titles = page.all('.task_title')
 
-    expect( titles[0].text ).to eq "MyString5" 
-    expect( titles[1].text ).to eq "MyString4" 
-    expect( titles[2].text ).to eq "MyString3" 
-    expect( titles[3].text ).to eq "MyString2" 
-    expect( titles[4].text ).to eq "MyString1" 
+    expect(titles[0].text).to eq "MyString5" 
+    expect(titles[1].text).to eq "MyString4" 
+    expect(titles[2].text).to eq "MyString3" 
+    expect(titles[3].text).to eq "MyString2" 
+    expect(titles[4].text).to eq "MyString1" 
+    
   end
+
+  it '一覧ページにて終了期間順にソートできる事を確認' do
+    FactoryGirl.create_list(:task, 5)
+    visit current_path
+    click_on '予定終了期間'
+    titles = page.all('.task_title')
+    
+    Task.all.order(:end_period).limit(5).each_with_index do |task, idx|
+      expect(titles[idx].text).to eq task.title
+    end  
+  end
+
 end
