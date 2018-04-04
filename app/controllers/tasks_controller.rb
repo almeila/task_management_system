@@ -1,13 +1,11 @@
 class TasksController < ApplicationController
 
-  before_action :load_task, only: [:edit, :destroy, :update]
+  before_action :load_task, only: [:edit, :destroy, :update, :status_update]
 
   def index
-    if params[:sort].present?
-      @tasks = Task.order(params[:sort])
-    else
-      @tasks = Task.order(created_at: 'DESC')
-    end  
+    @q = Task.search(params[:q] || {s: 'created_at desc'})
+    @tasks = @q.result(distinct: true)
+    @status = Task.aasm.states.map(&:name)
   end
 
   def new
@@ -28,7 +26,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       flash[:success] = t('controller.tasks.update_message', title: @task.title)
       redirect_to action: 'index'
@@ -43,6 +40,12 @@ class TasksController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def status_update
+    @task.send(params[:status_select])
+    @task.save!
+    redirect_to action: 'index'
+  end
+
   private
     def task_params
       params.require(:task).permit(:title, :content, :end_period)
@@ -50,5 +53,6 @@ class TasksController < ApplicationController
 
     def load_task
       @task = Task.find(params[:id])
-    end  
+    end
+  
 end

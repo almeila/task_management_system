@@ -3,21 +3,27 @@
 %div 
   = link_to t('view.tasks.new'), new_task_path
 %div 
-
-
+  = render 'search_form'
 .task_list
   %table
     %tr
-      %th= t('view.tasks.title')
+      %th= sort_link(@q, :title, t('view.tasks.title')) 
       %th= t('view.tasks.status')
-      %th= link_to t('view.tasks.end_period'), sort: 'end_period'
+      %th= sort_link(@q, :end_period, t('view.tasks.end_period'))
+      %th= sort_link(@q, :created_at, t('view.tasks.created_at')) 
       %th= t('view.tasks.edit')
       %th= t('view.tasks.delete')
     - @tasks.each do |task|
-      %tr
-        %td.task_title
-          = task.title
-        %td= task.status
-        %td= task.end_period
-        %td= link_to t('view.tasks.edit') , edit_task_path(task)
-        %td= link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }
+      = form_tag task_status_update_path do
+        = hidden_field_tag :id, task.id
+        %tr
+          %td.task_title
+            = task.title
+          %td.task_status
+            = select_tag :status_select, options_for_select(task.transitionable_state_option_by, task.status), class: "status_select task_#{task.id}", onchange: "this.form.submit()"
+          %td.task_end_period
+            = task.end_period.strftime("%Y年 %m月 %d日")
+          %td.task_created_at
+            = task.created_at.strftime("%Y年 %m月 %d日")
+          %td= link_to t('view.tasks.edit') , edit_task_path(task)
+          %td= link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }

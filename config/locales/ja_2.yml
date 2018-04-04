@@ -13,6 +13,11 @@ ja:
       index: '一覧'
       new: '新規作成'
       status: 'ステータス'
+      waiting: '未着手'
+      working: '着手中'
+      completed: '完了'
+      work: '着手中'
+      complete: '完了'
       delete: '削除'
       edit: '編集'
       index_page: 'タスク一覧'
@@ -25,6 +30,7 @@ ja:
       title: 'タイトル'
       content: '内容'
       end_period: '予定終了期間'
+      created_at: '作成日'
       create: '登録'
 
   model:
