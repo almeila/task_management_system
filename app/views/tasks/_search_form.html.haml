@@ -1,0 +1,15 @@
+= search_form_for @q do |f|
+  %p
+    = f.label :title_cont, t('view.tasks.title')
+    = f.search_field :title_cont
+  %p
+    = f.label :status, t('view.tasks.status')
+    = f.select :status_eq, @status.map{|s| [t("view.tasks.#{s}"),s]}, include_blank: true
+
+  %p
+    = f.label :end_period, t('view.tasks.end_period')
+    = f.date_select :end_period_gteq, include_blank: true
+    = '〜'
+    = f.date_select :end_period_lteq, include_blank: true 
+  = f.submit
+  = link_to 'クリア', request.path, class: "btn btn-default"

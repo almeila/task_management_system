@@ -10,4 +10,7 @@
   = f.label :end_period, t('view.tasks.end_period')
   = f.date_select :end_period , class: 'form-form-control date-picker' 
 
+  - if controller.action_name == 'edit'
+    = f.select :status, options_for_select(@task.transitionable_state_option_by, @task.status)
+
   = f.submit t('view.tasks.create')

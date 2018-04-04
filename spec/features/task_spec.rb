@@ -42,27 +42,72 @@ describe 'タスク機能', type: :feature do
     expect(page).not_to have_content @test_title
   end
 
-  it '一覧ページにてタスクが作成日順に表示されている事を確認' do
-    FactoryGirl.create_list(:task, 5)
-    visit current_path
-    titles = page.all('.task_title')
+  context '一覧' do
+    it 'タスクが作成日順に表示されている事を確認' do
+      FactoryGirl.create_list(:task, 5)
+      # FactoryGirlで一括登録するとcreated_atが同時刻になってしまうのでランダム値で更新する
+      Task.all.each do |task|
+        task.update_column(:created_at, Random.rand(Time.current .. Time.current.next_year))
+      end  
 
-    expect(titles[0].text).to eq "MyString5" 
-    expect(titles[1].text).to eq "MyString4" 
-    expect(titles[2].text).to eq "MyString3" 
-    expect(titles[3].text).to eq "MyString2" 
-    expect(titles[4].text).to eq "MyString1" 
-    
-  end
+      visit current_path
+      titles = page.all('.task_title')
 
-  it '一覧ページにて終了期間順にソートできる事を確認' do
-    FactoryGirl.create_list(:task, 5)
-    visit current_path
-    click_on '予定終了期間'
-    titles = page.all('.task_title')
-    
-    Task.all.order(:end_period).limit(5).each_with_index do |task, idx|
-      expect(titles[idx].text).to eq task.title
+      Task.order(created_at: 'DESC').each_with_index do |task, i|
+        expect(titles[i].text).to eq task.title
+      end  
+    end
+
+    it '終了期間順にソートできる事を確認' do
+      FactoryGirl.create_list(:task, 5)
+      visit current_path
+      click_on '予定終了期間'
+      titles = page.all('.task_title')
+      
+      Task.all.order(:end_period).limit(5).each_with_index do |task, i|
+        expect(titles[i].text).to eq task.title
+      end  
+    end
+
+    it 'タイトル検索' do
+      expected_value = 'MyString'
+      FactoryGirl.create_list(:task, 5)
+      visit current_path
+      fill_in 'タイトル', with: expected_value
+      click_on '検索'
+      page.all('.task_title').each do |title|
+        expect(title.text).to include expected_value
+      end
+    end  
+
+    it 'ステータス検索' do
+      expected_value = '未着手'
+      FactoryGirl.create_list(:task, 5)
+      visit current_path
+      select expected_value, from: 'q[status_eq]'
+      click_on '検索'
+      page.all('.task_status').each do |state|
+        expect(state.text.split.first).to eq expected_value
+      end
+    end  
+
+    it '予定終了期間検索' do
+      expected_value_s = Time.current.next_year.since(1.days)
+      expected_value_e = Time.current.next_year.since(3.days)
+      FactoryGirl.create_list(:task, 5)
+      visit current_path
+
+      select expected_value_s.year, from: 'q[end_period_gteq(1i)]'
+      select expected_value_s.month, from: 'q[end_period_gteq(2i)]'
+      select expected_value_s.day, from: 'q[end_period_gteq(3i)]'
+      select expected_value_e.year, from: 'q[end_period_lteq(1i)]'
+      select expected_value_e.month, from: 'q[end_period_lteq(2i)]'
+      select expected_value_e.day, from: 'q[end_period_lteq(3i)]'
+      click_on '検索'
+      
+      page.all('.task_end_period').each do |end_period|
+        expect(end_period.text).to be_within(expected_value_s).of(expected_value_e)
+      end
     end  
   end
 
