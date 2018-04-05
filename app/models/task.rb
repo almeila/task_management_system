@@ -1,10 +1,11 @@
 class Task < ApplicationRecord
   include AASM
+  enum priority: {low: 0, normal: 1, high: 2}
 
-  validates :title, :content, :end_period, presence: true
+  validates :title, :content, :end_period, :priority, presence: true
   validates :title, length: { maximum: 30 }
   validates :content, length: { maximum: 500 }
-  validate :end_period_check
+  validate :end_period_check, on: :create
 
   aasm column: :status do
     state :waiting,initial: true

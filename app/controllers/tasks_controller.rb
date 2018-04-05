@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
   before_action :load_task, only: [:edit, :destroy, :update, :status_update]
+  before_action :load_priorities, only: [:edit, :new, :create, :update]
 
   def index
     @q = Task.search(params[:q] || {s: 'created_at desc'})
@@ -48,11 +49,15 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:title, :content, :end_period)
+      params.require(:task).permit(:title, :content, :end_period, :priority)
     end
 
     def load_task
       @task = Task.find(params[:id])
     end
+
+    def load_priorities
+      @priorities = Task.priorities.keys
+    end  
   
 end

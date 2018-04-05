@@ -7,6 +7,7 @@ RSpec.describe 'タスクのValidation', type: :model do
     it 'タイトル' do expect(task.errors.messages[:title]).to include('を入力してください') end  
     it '内容' do expect(task.errors.messages[:content]).to include('を入力してください') end
     it '終了日時' do expect(task.errors.messages[:end_period]).to include('を入力してください') end
+    it '優先度' do expect(task.errors.messages[:priority]).to include('を入力してください') end      
   end  
 
   context '最大文字数のチェック' do

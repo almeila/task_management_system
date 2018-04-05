@@ -20,6 +20,7 @@ ja:
       complete: '完了'
       delete: '削除'
       edit: '編集'
+
       index_page: 'タスク一覧'
       new_page: '登録画面'
       edit_page: '編集画面'
@@ -31,7 +32,13 @@ ja:
       content: '内容'
       end_period: '予定終了期間'
       created_at: '作成日'
+      priority: '優先度'
       create: '登録'
+
+      priorities:
+        high: '高'
+        normal: '中'
+        low: '低'
 
   model:
     tasks:

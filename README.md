@@ -19,7 +19,7 @@
   * content(text)
   * status(string)
   * user_id(integer)
-  * position(integer)
+  * priority(integer)
   * end_period(datetime)
 
 ## Label

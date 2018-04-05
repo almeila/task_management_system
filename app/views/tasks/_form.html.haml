@@ -13,4 +13,7 @@
   - if controller.action_name == 'edit'
     = f.select :status, options_for_select(@task.transitionable_state_option_by, @task.status)
 
+  = f.label :priority, t("view.tasks.priority")
+  = f.select :priority, options_for_select(@priorities.map{|priority| [t("view.tasks.priorities.#{priority}"), priority]}, selected: @task.priority)
+
   = f.submit t('view.tasks.create')
