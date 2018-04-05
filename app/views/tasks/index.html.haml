@@ -9,6 +9,7 @@
     %tr
       %th= sort_link(@q, :title, t('view.tasks.title')) 
       %th= t('view.tasks.status')
+      %th= sort_link(@q, :priority, t('view.tasks.priority'))
       %th= sort_link(@q, :end_period, t('view.tasks.end_period'))
       %th= sort_link(@q, :created_at, t('view.tasks.created_at')) 
       %th= t('view.tasks.edit')
@@ -21,6 +22,8 @@
             = task.title
           %td.task_status
             = select_tag :status_select, options_for_select(task.transitionable_state_option_by, task.status), class: "status_select task_#{task.id}", onchange: "this.form.submit()"
+          %td.task_priority
+            = t("view.tasks.priorities.#{task.priority}")
           %td.task_end_period
             = task.end_period.strftime("%Y年 %m月 %d日")
           %td.task_created_at

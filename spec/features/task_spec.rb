@@ -13,6 +13,7 @@ describe 'タスク機能', type: :feature do
     select '2018', from: 'task[end_period(1i)]'
     select '11月', from: 'task[end_period(2i)]'
     select '25', from: 'task[end_period(3i)]'
+    select '中', from: 'task[priority]'
 
     click_on '登録'
   end
@@ -65,6 +66,17 @@ describe 'タスク機能', type: :feature do
       titles = page.all('.task_title')
       
       Task.all.order(:end_period).limit(5).each_with_index do |task, i|
+        expect(titles[i].text).to eq task.title
+      end  
+    end
+
+    it '優先度順にソートできる事を確認' do
+      FactoryGirl.create_list(:task, 5)
+      visit current_path
+      click_on '優先度'
+      titles = page.all('.task_title')
+      
+      Task.all.order(:priority).limit(5).each_with_index do |task, i|
         expect(titles[i].text).to eq task.title
       end  
     end
