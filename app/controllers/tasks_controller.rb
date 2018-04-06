@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   def index
     @q = Task.search(params[:q] || {s: 'created_at desc'})
-    @tasks = @q.result(distinct: true)
+    @tasks = @q.result(distinct: true).page(params[:page])
     @status = Task.aasm.states.map(&:name)
   end
 

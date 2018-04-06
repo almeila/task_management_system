@@ -54,7 +54,7 @@ describe 'タスク機能', type: :feature do
       visit current_path
       titles = page.all('.task_title')
 
-      Task.order(created_at: 'DESC').each_with_index do |task, i|
+      Task.order(created_at: 'DESC').limit(10).each_with_index do |task, i|
         expect(titles[i].text).to eq task.title
       end  
     end

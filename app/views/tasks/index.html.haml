@@ -1,4 +1,4 @@
-= t('view.tasks.task_count', count: @tasks.count)
+%h2= page_entries_info @tasks
 
 %div 
   = link_to t('view.tasks.new'), new_task_path
@@ -30,3 +30,5 @@
             = task.created_at.strftime("%Y年 %m月 %d日")
           %td= link_to t('view.tasks.edit') , edit_task_path(task)
           %td= link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }
+
+= paginate(@tasks)
