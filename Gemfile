@@ -20,13 +20,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml-rails'
 gem 'erb2haml'
 gem 'therubyracer'
-gem 'less-rails'
+gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-sass'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'ransack'
 gem 'kaminari'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
