@@ -1,5 +1,5 @@
 - if object.errors.any?
-  #error_explanation
+  #error_explanation.text-danger
     %h2
       = t('view.shared.error_message_count' , count: object.errors.count) 
     %ul
