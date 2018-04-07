@@ -1,19 +1,25 @@
 = form_for @task do |f|
   = render 'shared/error_messages', object: f.object
   
-  = f.label :title, t('view.tasks.title')
-  = f.text_field :title , class: 'form-control'
+  .form-group
+    = f.label :title, t('view.tasks.title')
+    = f.text_field :title , class: 'form-control'
 
-  = f.label :content, t('view.tasks.content')
-  = f.text_field :content , class: 'form-control'
+  .form-group
+    = f.label :content, t('view.tasks.content')
+    = f.text_area :content , class: 'form-control'
 
-  = f.label :end_period, t('view.tasks.end_period')
-  = f.date_select :end_period , class: 'form-form-control date-picker' 
+  .form-group
+    = f.label :end_period, t('view.tasks.end_period')
+    = f.date_select :end_period , class: 'form-form-control date-picker' 
 
   - if controller.action_name == 'edit'
-    = f.select :status, options_for_select(@task.transitionable_state_option_by, @task.status)
+    .form-group
+      = f.label :status, t("view.tasks.status")
+      = f.select :status, options_for_select(@task.transitionable_state_option_by, @task.status)
 
-  = f.label :priority, t("view.tasks.priority")
-  = f.select :priority, options_for_select(@priorities.map{|priority| [t("view.tasks.priorities.#{priority}"), priority]}, selected: @task.priority)
+  .form-group
+    = f.label :priority, t("view.tasks.priority")
+    = f.select :priority, options_for_select(@priorities.map{|priority| [t("view.tasks.priorities.#{priority}"), priority]}, selected: @task.priority)
 
-  = f.submit t('view.tasks.create')
+  = f.submit t('view.tasks.create'), class: 'btn btn-success btn-block'

@@ -20,6 +20,7 @@ ja:
       complete: '完了'
       delete: '削除'
       edit: '編集'
+      back: '戻る'
 
       index_page: 'タスク一覧'
       new_page: '登録画面'
@@ -27,10 +28,13 @@ ja:
 
       task_count: '件数： %{count}'
       delete_confirm: "%{title}を削除しますか？"
+      condition_search: '条件検索'
+      close: '閉じる'
 
       title: 'タイトル'
       content: '内容'
       end_period: '予定終了期間'
+      status: 'ステータス'
       created_at: '作成日'
       priority: '優先度'
       create: '登録'
