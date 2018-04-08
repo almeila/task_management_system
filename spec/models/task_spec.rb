@@ -38,7 +38,7 @@ RSpec.describe 'タスクのValidation', type: :model do
   end
 
   context '検索' do
-    FactoryGirl.create_list(:task, 20)
+    FactoryBot.create_list(:task, 20)
     Task.limit(5).each do |task|
       task.work
       task.save!

@@ -38,7 +38,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
 
   gem "rspec-rails"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "guard-rspec"
   gem "spring-commands-rspec"
   gem 'bullet'
@@ -47,6 +47,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'sqlite3'
   gem "faker"
   gem "database_cleaner"
   gem "launchy"

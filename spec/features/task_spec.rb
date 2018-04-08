@@ -45,8 +45,8 @@ describe 'タスク機能', type: :feature do
 
   context '一覧' do
     it 'タスクが作成日順に表示されている事を確認' do
-      FactoryGirl.create_list(:task, 5)
-      # FactoryGirlで一括登録するとcreated_atが同時刻になってしまうのでランダム値で更新する
+      FactoryBot.create_list(:task, 5)
+      # FactoryBotで一括登録するとcreated_atが同時刻になってしまうのでランダム値で更新する
       Task.all.each do |task|
         task.update_column(:created_at, Random.rand(Time.current .. Time.current.next_year))
       end  
@@ -60,7 +60,7 @@ describe 'タスク機能', type: :feature do
     end
 
     it '終了期間順にソートできる事を確認' do
-      FactoryGirl.create_list(:task, 5)
+      FactoryBot.create_list(:task, 5)
       visit current_path
       click_on '予定終了期間'
       titles = page.all('.task_title')
@@ -71,7 +71,7 @@ describe 'タスク機能', type: :feature do
     end
 
     it '優先度順にソートできる事を確認' do
-      FactoryGirl.create_list(:task, 5)
+      FactoryBot.create_list(:task, 5)
       visit current_path
       click_on '優先度'
       titles = page.all('.task_title')
@@ -83,7 +83,7 @@ describe 'タスク機能', type: :feature do
 
     it 'タイトル検索' do
       expected_value = 'MyString'
-      FactoryGirl.create_list(:task, 5)
+      FactoryBot.create_list(:task, 5)
       visit current_path
       fill_in 'タイトル', with: expected_value
       click_on '検索'
@@ -94,7 +94,7 @@ describe 'タスク機能', type: :feature do
 
     it 'ステータス検索' do
       expected_value = '未着手'
-      FactoryGirl.create_list(:task, 5)
+      FactoryBot.create_list(:task, 5)
       visit current_path
       select expected_value, from: 'q[status_eq]'
       click_on '検索'
@@ -106,7 +106,7 @@ describe 'タスク機能', type: :feature do
     it '予定終了期間検索' do
       expected_value_s = Time.current.next_year.since(1.days)
       expected_value_e = Time.current.next_year.since(3.days)
-      FactoryGirl.create_list(:task, 5)
+      FactoryBot.create_list(:task, 5)
       visit current_path
 
       select expected_value_s.year, from: 'q[end_period_gteq(1i)]'
