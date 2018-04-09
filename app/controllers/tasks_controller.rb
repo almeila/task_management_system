@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+  before_action :logged_in_user
   before_action :load_task, only: [:edit, :destroy, :update, :status_update]
   before_action :load_priorities, only: [:edit, :new, :create, :update]
 
