@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :load_priorities, only: [:edit, :new, :create, :update]
 
   def index
-    @q = Task.search(params[:q] || {s: 'created_at desc'})
+    @q = current_user.tasks.search(params[:q] || {s: 'created_at desc'})
     @tasks = @q.result(distinct: true).page(params[:page])
     @status = Task.aasm.states.map(&:name)
   end
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = t('controller.tasks.create_message', title: @task.title)
       redirect_to action: 'index'
