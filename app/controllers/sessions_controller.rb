@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_back_or root_path
     else
-      flash.now[:danger] = 'メールアドレスかパスワードが間違っています！'
+      flash.now[:danger] = t('controller.tasks.not_login_message')
       render 'new'
     end
   end  

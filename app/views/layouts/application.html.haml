@@ -2,16 +2,16 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title ElTraining
+    %title= yield(:title)
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .container
+      = render 'layouts/header' 
 
       - flash.each do |message_type, message|
         = content_tag(:div, message, class: "alert alert-#{message_type}")
         
-      = render 'layouts/header'  
       = yield
       = debug(params) if Rails.env.development?

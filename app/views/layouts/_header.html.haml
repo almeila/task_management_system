@@ -2,3 +2,6 @@
   = link_to "ログアウト", logout_path, method: :delete, class: 'btn btn-default navbar-btn pull-right'
 - else
   = link_to "ログイン", login_path, class: 'btn btn-default navbar-btn pull-right'  
+
+%h1.text-center.page-header
+  = yield(:title)

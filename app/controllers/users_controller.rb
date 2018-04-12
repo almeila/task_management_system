@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in(@user)
-      flash[:info] = '登録完了！'
+      flash[:info] = t('controller.users.login_message')
       redirect_to root_url
     else
       render 'new'
@@ -20,4 +20,4 @@ private
     params.require(:user).permit(:name, :email, :password,
                                 :password_confirmation)
   end
-end  
+end
