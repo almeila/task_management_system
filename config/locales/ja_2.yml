@@ -1,9 +1,18 @@
 ja:
   controller:
+    application:
+      please_login_message: 'ログインして下さい'
+
     tasks:
       create_message: '%{title}を登録しました。'
       update_message: '%{title}を更新しました。'
       destroy_message: '削除しました。'
+
+    users:
+      login_message:  '登録完了！'
+
+    sessions:
+      not_login_message: 'メールアドレスかパスワードが間違っています！'
 
   view:
     shared:
@@ -21,6 +30,7 @@ ja:
       delete: '削除'
       edit: '編集'
       back: '戻る'
+      clear: 'クリア'
 
       index_page: 'タスク一覧'
       new_page: '登録画面'
@@ -44,6 +54,22 @@ ja:
         normal: '中'
         low: '低'
 
+    users:
+      name: '名前'
+      email: 'メールアドレス'
+      password: 'パスワード'
+      password_confirmation: '確認のためもう１度パスワードを入力して下さい。'
+
+      registration_page: 'ユーザー登録'
+      submit: '登録'
+
+    settions:
+      login: 'ログイン'
+      logout: 'ログアウト'
+      remember_me: 'ログイン状態を保持する。'
+      login_page: 'ログイン'
+      to_register: '登録はこちら！'
+      
   model:
     tasks:
       end_period_error_message: 'は未来の日付を入力して下さい。'

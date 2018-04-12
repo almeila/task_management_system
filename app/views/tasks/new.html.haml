@@ -1,4 +1,4 @@
-%h1.text-center.page-header
-  = t('view.tasks.new_page')
+- provide(:title, t('view.tasks.new_page'))
+
 = render 'form'
 = link_to t('view.tasks.back'), tasks_path, class: 'btn btn-default btn-block'

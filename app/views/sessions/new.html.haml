@@ -1,0 +1,19 @@
+- provide(:title, t('view.settions.login_page'))
+
+= form_for(:session, url: login_path) do |f|
+
+  .form-group
+    = f.label :email, t('view.users.email')
+    = f.email_field :email, class: 'form-control'
+
+  .form-group
+    = f.label :password, t('view.users.password')
+    = f.password_field :password, class: 'form-control'
+
+  .form-group
+    = f.check_box :remember_me
+    = f.label :remember_me, t('view.settions.remember_me')
+  
+  = f.submit t('view.settions.login_page'), class: 'btn btn-success btn-block'
+
+  = link_to t('view.settions.to_register'), signup_path, class: 'pull-right'
