@@ -1,0 +1,29 @@
+- provide(:title, "#{@user.name}の登録タスク一覧")
+= link_to t('ユーザー一覧へ戻る'), admin_users_path, class: 'btn btn-default pull-right'
+= link_to t('view.tasks.clear'), request.path, class: "btn btn-default pull-right"
+.task_list
+  %table.table.table-striped.table-hover.table-responsive
+    %thead
+      %tr
+        %th= sort_link(@q, :title, t('view.tasks.title')) 
+        %th= t('view.tasks.status')
+        %th= sort_link(@q, :priority, t('view.tasks.priority'))
+        %th= sort_link(@q, :end_period, t('view.tasks.end_period'))
+        %th= sort_link(@q, :created_at, t('view.tasks.created_at')) 
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td.task_title
+            = task.title
+          %td.task_status
+            = t("view.tasks.#{task.status}")
+          %td.task_priority
+            = t("view.tasks.priorities.#{task.priority}")
+          %td.task_end_period
+            = task.end_period.strftime("%Y年 %m月 %d日")
+          %td.task_created_at
+            = task.created_at.strftime("%Y年 %m月 %d日")
+
+.text-center
+  = page_entries_info @tasks
+  = paginate(@tasks)

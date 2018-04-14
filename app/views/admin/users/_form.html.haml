@@ -1,0 +1,21 @@
+= form_for [:admin, @user] do |f|
+  = render 'shared/error_messages', object: f.object
+  
+  .form-group
+    = f.label :name, t('view.users.name')
+    = f.text_field :name, class: 'form-control'
+
+  .form-group
+    = f.label :email, t('view.users.email')
+    = f.email_field :email, class: 'form-control'
+
+  - if controller.action_name == 'new'
+    .form-group
+      = f.label :password, t('view.users.password')
+      = f.password_field :password, class: 'form-control'
+
+    .form-group
+      = f.label :password_confirmation, t('view.users.password_confirmation')
+      = f.password_field :password_confirmation, class: 'form-control'
+
+  = f.submit t('view.tasks.create'), class: 'btn btn-primary btn-block'
