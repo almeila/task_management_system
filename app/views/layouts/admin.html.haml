@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= yield(:title)
+    = csrf_meta_tags
+    = stylesheet_link_tag    'admin/base', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+      .container-fluid
+        .navbar-header
+          = link_to 'El-Training', admin_path, class: 'navbar-brand'
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          %ul.nav.nav-sidebar
+            = sidebar_list_items
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+          %h1.page-header= yield(:title) if yield(:title)
+          - flash.each do |message_type, message|
+            = content_tag(:div, message, class: "alert alert-#{message_type}")
+          = yield
+          = debug(params) if Rails.env.development?
