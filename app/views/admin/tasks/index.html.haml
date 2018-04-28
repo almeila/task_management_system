@@ -1,5 +1,5 @@
 - provide(:title, "#{@user.name}の登録タスク一覧")
-= link_to t('ユーザー一覧へ戻る'), admin_users_path, class: 'btn btn-default pull-right'
+= link_to 'ユーザー一覧へ戻る', admin_users_path, class: 'btn btn-default pull-right'
 = link_to t('view.tasks.clear'), request.path, class: "btn btn-default pull-right"
 .task_list
   %table.table.table-striped.table-hover.table-responsive
