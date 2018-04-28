@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   before_action :load_user, only: [:edit, :destroy, :update]
+  before_action :load_role, only: [:edit, :update]
 
   def index
     @q = User.includes(:tasks).search(params[:q])
@@ -16,7 +17,7 @@ class Admin::UsersController < Admin::BaseController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:info] = 'ユーザーを作成しました。'
+      flash[:success] = 'ユーザーを作成しました。'
       redirect_to admin_users_path
     else
       render 'new'
@@ -33,23 +34,26 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def destroy
-    @user.destroy
-    flash[:success] = "ユーザーを削除しました。"
+    if @user.destroy
+      flash[:success] = "ユーザーを削除しました。"
+    else
+      flash[:danger] = "#{@user.errors.full_messages}"
+    end
     redirect_to action: 'index'
-  end
-
-  def tasks
-    
   end
 
   private
   
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
     end
 
     def load_user
       @user = User.find(params[:id])
+    end  
+
+    def load_role
+      @roles = User.admins.keys
     end  
 
 end
