@@ -1,7 +1,20 @@
-- if logged_in?
-  = link_to "ログアウト", logout_path, method: :delete, class: 'btn btn-default navbar-btn pull-right'
-- else
-  = link_to "ログイン", login_path, class: 'btn btn-default navbar-btn pull-right'  
+%header.navbar.navbar-fixed-top.navbar-inverse
+  .container
+    %nav
+      %ul.nav.navbar-nav.navbar-right
+        - if logged_in?
+          %li= link_to 'タスク管理', root_path
+          %li= link_to 'ラベル管理', labels_path
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+              アカウント
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to '管理画面', admin_path
+              %li.divider
+              %li= link_to 'ログアウト', logout_path, method: :delete
+        - else
+          %li= link_to "ログイン", login_path
 
 %h1.text-center.page-header
   = yield(:title)

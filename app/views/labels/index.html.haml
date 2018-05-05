@@ -1,0 +1,30 @@
+- provide(:title, 'ラベル管理')
+
+.label_area
+  .label_new
+    = form_for(@label) do |f|
+      = render 'shared/error_messages', object: f.object
+
+      .form-group
+        = f.label :name, '新規ラベル名'
+        = f.text_field :name , class: 'form-control'
+
+      .form-group
+        = 'ラベルカラーを選択して下さい。'
+        %br
+        - @colors.each do |color|
+          .color_icon.radio-inline
+            = f.radio_button :color, color ,{id: "label_#{color}"}
+            = f.label "#{color}", color ,{class: "#{color}"}
+
+      .actions
+        = f.submit '登録', class: 'btn btn-success btn-block'
+
+  - if @labels
+    .labels
+      %div= '作成ラベル一覧'
+      .panels
+        - @labels.each do |label|
+          .label_panel{class: "#{label.color}"}
+            = "#{label.name}　"
+            = link_to fa_icon('trash lg'), label, method: :delete, data: { confirm: "#{label.name}を削除しますか？" }

@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
   before_action :logged_in_user
-  before_action :load_task, only: [:edit, :destroy, :update, :status_update]
+  before_action :load_task, only: [:edit, :destroy, :update, :status_update, :add_label, :remove_label]
   before_action :load_priorities, only: [:edit, :new, :create, :update]
 
   def index
-    @q = current_user.tasks.search(params[:q] || {s: 'created_at desc'})
+    @q = current_user.tasks.includes(:labels).search(params[:q] || {s: 'created_at desc'})
     @tasks = @q.result(distinct: true).page(params[:page])
     @status = Task.aasm.states.map(&:name)
+    @labels = Label.all
   end
 
   def new
@@ -44,6 +45,16 @@ class TasksController < ApplicationController
   def status_update
     @task.send(params[:status_select])
     @task.save!
+    redirect_to action: 'index'
+  end
+
+  def add_label
+    @task.task_labels.create(label_id: params[:label_id])
+    redirect_to action: 'index'
+  end
+
+  def remove_label
+    @task.task_labels.find_by(label_id: params[:label_id]).destroy
     redirect_to action: 'index'
   end
 

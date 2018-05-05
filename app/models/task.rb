@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :task_labels
+  has_many :labels, through: :task_labels
 
   include AASM
   enum priority: {low: 0, normal: 1, high: 2}

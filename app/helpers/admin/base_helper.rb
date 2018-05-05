@@ -7,7 +7,7 @@ module Admin::BaseHelper
   def sidebar_list_items
     items = [
       {text: 'USERS', path: admin_users_path},
-      {text: 'GROUP', path: '#'}
+      {text: 'LABELS', path: admin_labels_path}
     ]
     html = ''
     items.each do |item|

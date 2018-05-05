@@ -3,36 +3,48 @@
 = link_to t('view.tasks.new'), new_task_path, class: 'btn btn-primary btn-lg pull-right'
 = link_to t('view.tasks.clear'), request.path, class: "btn btn-default btn-lg pull-right"
 .btn.btn-primary.btn-lg.pull-right{'data-target': "#myModal", 'data-toggle': 'modal'}
+  %i.fa.fa-external-link
   = t('view.tasks.condition_search')
 
 .task_list
   %table.table.table-striped.table-hover.table-responsive
     %thead
       %tr
+        %th= 'ラベル'
         %th= sort_link(@q, :title, t('view.tasks.title')) 
         %th= t('view.tasks.status')
         %th= sort_link(@q, :priority, t('view.tasks.priority'))
         %th= sort_link(@q, :end_period, t('view.tasks.end_period'))
         %th= sort_link(@q, :created_at, t('view.tasks.created_at')) 
         %th
-        %th
+        %th          
     %tbody
       - @tasks.each do |task|
-        = form_tag task_status_update_path do
-          = hidden_field_tag :id, task.id
-          %tr
-            %td.task_title
-              = task.title
-            %td.task_status
+        = render partial: 'select_labels', locals: {task: task}
+        %tr
+          %td.labels{style: "width: 180px;"}
+            - task.labels.each do |label|
+              .pull-left.label_panel{class: "#{label.color}", style: "width: 70%;"}
+                = "#{label.name}　"
+                = link_to fa_icon('trash lg'), remove_label_path(id: task.id, label_id: label.id), method: :post, data: {disable_with: '...'}
+            .pull-left
+              .fa.fa-plus.btn{'data-target': "#label_list_#{task.id}", 'data-toggle': 'modal'}
+          %td.task_title
+            = task.title
+          %td.task_status
+            = form_tag task_status_update_path do
+              = hidden_field_tag :id, task.id
               = select_tag :status_select, options_for_select(task.transitionable_state_option_by, task.status), class: "status_select task_#{task.id}", onchange: "this.form.submit()"
-            %td.task_priority
-              = t("view.tasks.priorities.#{task.priority}")
-            %td.task_end_period
-              = task.end_period.strftime("%Y年 %m月 %d日")
-            %td.task_created_at
-              = task.created_at.strftime("%Y年 %m月 %d日")
-            %td= link_to t('view.tasks.edit') , edit_task_path(task)
-            %td= link_to t('view.tasks.delete') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }
+          %td.task_priority
+            = t("view.tasks.priorities.#{task.priority}")
+          %td.task_end_period
+            = task.end_period.strftime("%Y年 %m月 %d日")
+          %td.task_created_at
+            = task.created_at.strftime("%Y年 %m月 %d日")
+          %td
+            = link_to fa_icon('edit lg') , edit_task_path(task)
+          %td
+            = link_to fa_icon('trash lg') , task, method: :delete, data: { confirm: t('view.tasks.delete_confirm', title: task.title) }
 
 .text-center
   = page_entries_info @tasks
