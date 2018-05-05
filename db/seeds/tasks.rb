@@ -4,7 +4,7 @@
   Task.create(
     title: "#{Faker::Pokemon.name}を捕まえる。",
     content: "生息地：#{Faker::Pokemon.location}",
-    user_id: 90,
+    user_id: first_user_id,
     end_period: Random.rand(Time.current.next_day .. Time.current.next_year),
     priority: [:low, :normal, :high].sample
   )

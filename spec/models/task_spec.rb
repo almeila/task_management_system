@@ -1,23 +1,23 @@
 RSpec.describe 'タスクのValidation', type: :model do
-  
+
   context '必須項目の入力チェック' do
     task = Task.new()
     task.valid?
 
-    it 'タイトル' do expect(task.errors.messages[:title]).to include('を入力してください') end  
+    it 'タイトル' do expect(task.errors.messages[:title]).to include('を入力してください') end
     it '内容' do expect(task.errors.messages[:content]).to include('を入力してください') end
     it '終了日時' do expect(task.errors.messages[:end_period]).to include('を入力してください') end
-    it '優先度' do expect(task.errors.messages[:priority]).to include('を入力してください') end      
-  end  
+    it '優先度' do expect(task.errors.messages[:priority]).to include('を入力してください') end
+  end
 
   context '最大文字数のチェック' do
     task = Task.new(title: 'x'*31, content: 'x'*501)
     task.valid?
 
     it 'タイトル' do expect(task.errors.messages[:title]).to include('は30文字以内で入力してください') end
-    it '内容' do expect(task.errors.messages[:content]).to include('は500文字以内で入力してください') end  
-  end  
-  
+    it '内容' do expect(task.errors.messages[:content]).to include('は500文字以内で入力してください') end
+  end
+
   context 'ステータス遷移ルールのチェック' do
     task = Task.new(title: 'x'*30, content: 'x'*500, end_period: Time.now.tomorrow)
     context '未着手状態' do

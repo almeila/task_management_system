@@ -31,17 +31,12 @@ gem "font-awesome-rails"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 
   gem 'pry-rails' 
   gem 'pry-doc'  
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
-
-  gem "rspec-rails"
-  gem "factory_bot_rails"
-  gem "guard-rspec"
   gem "spring-commands-rspec"
   gem 'bullet'
   gem 'hirb'
@@ -55,6 +50,11 @@ group :test do
   gem "launchy"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "guard-rspec"
+  gem 'capybara', '~> 2.13'
+  gem 'rack_session_access'
 end
 
 group :development do

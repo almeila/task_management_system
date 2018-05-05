@@ -2,7 +2,10 @@ require 'rails_helper'
 
 describe 'タスク機能', type: :feature do
 
+  let(:user) { User.create(name: 'テスト名', email: 'test@test.com', password: 'password') }
+
   before do
+    log_in(user)
     visit root_path
     click_on '新規作成'
 
