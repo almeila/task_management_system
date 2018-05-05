@@ -15,8 +15,14 @@
             = f.label :end_period, t('view.tasks.end_period')
             = f.date_select :end_period_gteq, include_blank: true
             = '〜'
-            = f.date_select :end_period_lteq, include_blank: true 
-        .modal-footer 
+            = f.date_select :end_period_lteq, include_blank: true
+          .form_group.labels
+            = f.label :labels_id_in, 'ラベル'
+            .panels
+              = f.collection_check_boxes :labels_id_in, @labels, :id, :name do |b|
+                .label_panel{class: "#{b.object.color}", style: 'width: 23%'}
+                  = b.label{b.check_box + '　' + b.text}
+        .modal-footer
           .btn.btn-default{'data-dismiss': 'modal'}
             = t('view.tasks.close')
           = f.submit class: 'btn btn-default'

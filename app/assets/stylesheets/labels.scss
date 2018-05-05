@@ -1,0 +1,67 @@
+// Place all the styles related to the labels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin colors {
+  .red {background-color: red;}
+  .gray {background-color: grey;}
+  .blue {background-color: blue;}
+  .green {background-color: green;}
+  .purple {background-color: purple;}
+}
+
+.label_area {
+  width: 50%;
+  margin: auto;
+  .label_new {
+    .form-group {
+      margin-bottom: 35px;
+    }
+    .color_icon {
+      label {
+        display: inline-block;
+        color: #fff;
+        padding: 5px 10px;
+        width: 80px;
+        opacity: 0.4;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      @include colors;
+
+      input[type="radio"]:checked + label {
+        opacity: 1;
+      }
+    }
+  }
+  .labels{
+    margin-top: 30px;
+    .label_panel {
+      width: 23%;
+    }
+  }
+}
+
+.labels{
+  .panels {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    display: flex;
+  }
+  .label_submit{
+    width: 25%;
+  }
+  .label_panel {
+    color: #fff;
+    border-radius: 5px;
+    height: 25px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+  }
+  @include colors;
+  .fa-trash{ color: white;  }
+  label{font-weight : normal;}
+}

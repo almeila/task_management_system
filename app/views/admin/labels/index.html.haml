@@ -1,0 +1,22 @@
+- provide(:title, 'ラベル一覧')
+.label_list
+  %table.table.table-striped.table-hover.table-responsive
+    %thead
+      %tr
+        %th= sort_link(@q, :id, 'ID') 
+        %th= sort_link(@q, :name, '名前') 
+        %th= '該当タスク数'
+
+    %tbody
+      - @labels.each do |label|
+        %tr
+          %td
+            = label.id
+          %td
+            = label.name
+          %td
+            = label.tasks.size
+
+.text-center
+  = page_entries_info @labels
+  = paginate(@labels)

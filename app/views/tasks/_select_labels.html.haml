@@ -1,0 +1,15 @@
+.modal.fade{id: "label_list_#{task.id}"}
+  .modal-dialog
+    .modal-content
+      .modal-header.text-center
+        = "「#{task.title}」に付与するラベルを選択"
+      .modal-body.labels
+        .panels
+          - select_labels = @labels - task.labels
+          - select_labels.each do |label|
+            .label_submit
+              = link_to label.name, add_label_path(id: task.id, label_id: label.id), method: :post, class: "label_panel #{label.color}", data: {disable_with: '追加中...'}
+
+      .modal-footer
+        .btn.btn-default{'data-dismiss': 'modal'}
+          = t('view.tasks.close')
