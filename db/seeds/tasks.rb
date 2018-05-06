@@ -1,6 +1,6 @@
 # userが作成されている必要があります
 30.times do
-  first_user_id = User.first.id
+  first_user_id = User.find_by(email: 'testmail@first.com').id
   Task.create(
     title: "#{Faker::Pokemon.name}を捕まえる。",
     content: "生息地：#{Faker::Pokemon.location}",
