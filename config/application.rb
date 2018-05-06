@@ -9,5 +9,6 @@ module ElTraining
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    ActiveRecord::Base.protected_environments = %w(production staging)
   end
 end
